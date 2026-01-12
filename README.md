@@ -72,26 +72,54 @@ dotnet run
 
 ## 📁 โครงสร้างโปรเจกต์
 
+โปรเจกต์นี้ใช้สถาปัตยกรรม **MVVM (Model-View-ViewModel)** แบบมาตรฐาน:
+
 ```
 My-program/
-├── Assets/              # ไฟล์ไอคอนและ assets
-├── Models/              # Data models
-├── ViewModels/          # MVVM ViewModels
-├── Views/               # UI Views (AXAML files)
-│   ├── auth/           # หน้า Login/Authentication
-│   ├── home/           # หน้าหลัก
-│   ├── MainForm/       # Main Window
-│   ├── Navbar/         # Navigation Bar
-│   ├── profiles/       # หน้าโปรไฟล์
-│   ├── sale/           # หน้าขาย
-│   ├── branMagement/   # การจัดการสาขา
-│   ├── config/         # Database configuration
-│   └── helper/         # Helper classes
-├── picture/            # รูปภาพและ icons
-├── App.axaml           # Application configuration
-├── Program.cs          # Entry point
-└── My-program.csproj   # Project file
+├── Assets/                  # ทรัพยากรทั้งหมด (รูปภาพ, ไอคอน, ฟอนต์)
+│   ├── Fonts/              # ฟอนต์
+│   ├── Icons/              # ไอคอนต่างๆ
+│   └── Images/             # รูปภาพและกราฟิก
+│
+├── Core/                    # Core functionality และ business logic
+│   ├── Config/             # การตั้งค่า (Database connection, etc.)
+│   ├── Helpers/            # Helper classes (Encryption, Dialog, Formatter)
+│   └── Services/           # Business logic services
+│
+├── Models/                  # Data models และ entities
+│
+├── ViewModels/             # MVVM ViewModels
+│   ├── Auth/               # ViewModels สำหรับ Authentication
+│   ├── Branch/             # ViewModels สำหรับการจัดการสาขา
+│   ├── Home/               # ViewModels สำหรับหน้าหลัก
+│   ├── Profile/            # ViewModels สำหรับโปรไฟล์
+│   ├── Sale/               # ViewModels สำหรับการขาย
+│   ├── MainWindowViewModel.cs
+│   └── ViewModelBase.cs
+│
+├── Views/                   # UI Views (AXAML files เท่านั้น)
+│   ├── Auth/               # หน้า Login/Authentication
+│   ├── Branch/             # หน้าจัดการสาขา
+│   ├── Common/             # Components ที่ใช้ร่วมกัน (Navbar, etc.)
+│   ├── Home/               # หน้าหลัก
+│   ├── MainWindow/         # Main Window
+│   ├── Profile/            # หน้าโปรไฟล์
+│   └── Sale/               # หน้าขาย
+│
+├── App.axaml               # Application configuration
+├── App.axaml.cs            # Application code-behind
+├── Program.cs              # Entry point
+├── ViewLocator.cs          # ViewModel to View mapping
+└── My-program.csproj       # Project file
 ```
+
+### 🎯 คำอธิบายโครงสร้าง
+
+- **Assets/**: เก็บทรัพยากรทั้งหมด (ไฟล์รูป ไอคอน ฟอนต์)
+- **Core/**: เก็บ business logic, helpers, และ configuration
+- **Models/**: เก็บ data models และ entities
+- **ViewModels/**: เก็บ MVVM ViewModels (แยกตาม feature)
+- **Views/**: เก็บ UI Views เท่านั้น (ไฟล์ AXAML และ code-behind)
 
 ---
 
