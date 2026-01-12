@@ -1,0 +1,15 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="My_program.Views.Profiles"
+             Background="White">
+    
+    <Grid>
+        <TextBlock Text="ໜ້າprofile (Profile Page)"
+                   FontSize="32"
+                   FontWeight="Bold"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Foreground="#1e4d7b"/>
+    </Grid>
+    
+</UserControl>

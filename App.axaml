@@ -1,0 +1,29 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="My_program.App"
+             xmlns:local="using:My_program"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+    <Application.DataTemplates>
+        <local:ViewLocator/>
+    </Application.DataTemplates>
+  
+    <Application.Styles>
+        <FluentTheme />
+        
+        <!-- Global Font Style สำหรับทั้งแอปพลิเคชัน -->
+        <Style Selector="TextBlock">
+            <Setter Property="FontFamily" Value="Phetsarath OT, Noto Sans Lao, Saysettha OT, Arial"/>
+        </Style>
+        <Style Selector="TextBox">
+            <Setter Property="FontFamily" Value="Phetsarath OT, Noto Sans Lao, Saysettha OT, Arial"/>
+        </Style>
+        <Style Selector="Button">
+            <Setter Property="FontFamily" Value="Phetsarath OT, Noto Sans Lao, Saysettha OT, Arial"/>
+        </Style>
+        <Style Selector="MenuItem">
+            <Setter Property="FontFamily" Value="Phetsarath OT, Noto Sans Lao, Saysettha OT, Arial"/>
+        </Style>
+    </Application.Styles>
+</Application>

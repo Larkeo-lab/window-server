@@ -1,0 +1,137 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="My_program.Views.branMagement"
+             Background="White">
+
+    <Grid Margin="20">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="400"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- ส่วนซ้าย: ฟอร์มจัดการข้อมูลยี่ห้อ -->
+        <Border Grid.Column="0" BorderBrush="Gray" BorderThickness="1" 
+                CornerRadius="5" Padding="20" Margin="0,0,10,0" Background="WhiteSmoke">
+            <StackPanel>
+                <!-- หัวข้อ -->
+                <TextBlock Text="ຈັດການຂໍ້ມູນຍີ່ຫໍສິນຄ້າ" 
+                          FontSize="22" FontWeight="Bold" 
+                          Foreground="Black"
+                          Margin="0,0,0,20" 
+                          HorizontalAlignment="Left"/>
+
+                <!-- ป้ายกำกับ -->
+                <TextBlock Text="ຊື່ຍີ່ຫໍ" FontSize="16" Margin="0,0,0,5" Foreground="Black"/>
+
+                <!-- TextBox สำหรับชื่อยี่ห้อ -->
+                <TextBox x:Name="txtBrandName" 
+                        x:FieldModifier="public"
+                        Height="40" 
+                        FontSize="16"
+                        Watermark="ກະລຸນາໃສ່ຊື່ຍີ່ຫໍ..."
+                        Margin="0,0,0,20"/>
+
+                <!-- ปุ่มต่างๆ -->
+                <StackPanel Orientation="Horizontal" 
+                           HorizontalAlignment="Center"
+                           Spacing="10">
+                    
+                    <!-- ปุ่มเพิ่ม (สีน้ำเงิน) -->
+                    <Button x:Name="btnAdd" 
+                           x:FieldModifier="public"
+                           Content="ເພີ່ມ" 
+                           Width="80" Height="40"
+                           Background="#007BFF" 
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           CornerRadius="3"
+                           Cursor="Hand"/>
+
+                    <!-- ปุ่มแก้ไข (สีเหลือง) -->
+                    <Button x:Name="btnEdit" 
+                           x:FieldModifier="public"
+                           Content="ແກ້ໄຂ" 
+                           Width="80" Height="40"
+                           Background="#FFC107" 
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           CornerRadius="3"
+                           Cursor="Hand"/>
+
+                    <!-- ปุ่มลบ (สีแดง) -->
+                    <Button x:Name="btnDelete" 
+                           x:FieldModifier="public"
+                           Content="ລົບ" 
+                           Width="80" Height="40"
+                           Background="#DC3545" 
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           CornerRadius="3"
+                           Cursor="Hand"/>
+
+                    <!-- ปุ่มยกเลิก (สีเทา) -->
+                    <Button x:Name="btnCancel" 
+                           x:FieldModifier="public"
+                           Content="ຍົກເລີກ" 
+                           Width="80" Height="40"
+                           Background="#6C757D" 
+                           Foreground="White"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           CornerRadius="3"
+                           Cursor="Hand"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <!-- ส่วนขวา: ตารางแสดงข้อมูล -->
+        <Border Grid.Column="1" BorderBrush="Gray" BorderThickness="1" 
+                CornerRadius="5" Padding="20" Background="White">
+            <StackPanel>
+                <!-- TextBox สำหรับค้นหา -->
+                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                    <TextBlock Text="ຄົ້ນຫາ" 
+                              FontSize="16" 
+                              VerticalAlignment="Center"
+                              Margin="0,0,10,0"/>
+                    <TextBox x:Name="txtSearch" 
+                            x:FieldModifier="public"
+                            Width="300" 
+                            Height="35"
+                            FontSize="14"
+                            Watermark="ຄົ້ນຫາຊື່ຍີ່ຫໍ..."/>
+                </StackPanel>
+
+                <!-- DataGrid สำหรับแสดงข้อมูล -->
+                <DataGrid x:Name="dgBrands" 
+                         x:FieldModifier="public"
+                         x:CompileBindings="False"
+                         AutoGenerateColumns="False"
+                         CanUserReorderColumns="True"
+                         CanUserResizeColumns="True"
+                         GridLinesVisibility="All"
+                         BorderBrush="Gray"
+                         BorderThickness="1"
+                         IsReadOnly="True"
+                         HeadersVisibility="Column"
+                         Height="500">
+                    
+                    <DataGrid.Columns>
+                        <!-- คอลัมน์ลำดับ -->
+                        <DataGridTextColumn Header="ລຳດັບ" 
+                                          Width="100"
+                                          Binding="{Binding Index}"/>
+
+                        <!-- คอลัมน์ชื่อยี่ห้อ -->
+                        <DataGridTextColumn Header="ຊື່ຍີ່ຫໍ" 
+                                          Width="*"
+                                          Binding="{Binding BrandName}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
+    </Grid>
+</UserControl>

@@ -1,0 +1,122 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="My_program.Views.Navbar"
+             Height="60" Background="#00A6ED">
+    
+    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+
+        <!-- หน้าหลัก -->
+            <Button x:Name="toolStripMenuItemHome"  Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/home_Page.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ໜ້າລັກ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- จัดการข้อมูล -->
+            <Button x:Name="toolStripMenuItemData" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <Button.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuItem x:Name="menuBrandManagement" Header="ຈັດການຂໍ້ມູນຍີ່ຫໍ"/>
+                        <MenuItem Header="ຈັດการຂໍ້ມູນຜິດ"/>
+                        <MenuItem Header="ຈັດการຂໍ້ມູນປະເພດສິນค้า"/>
+                        <MenuItem Header="ຈັດการຂໍ້ມູນສິນค้า"/>
+                        <MenuItem Header="ຈັດการຂໍ້ມູນຜະນັກງານ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນສັດຕະນາຄານປະປ່ວນ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນຜູ່ຄູ່ະເຄົາ"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/add_Database.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ຈັດການຂໍ້ມູນ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- รายงาน -->
+            <Button x:Name="toolStripMenuItemOrder" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <Button.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuItem Header="ຈັດການຂໍ້ມູນສັ່ງເຄື່ອງສັ່ງຄ້າ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນຕຸ່ນສິນຄ້າ"/>
+                        <Separator/>
+                        <MenuItem Header="ອາຍການຂໍ້ມູນສັ່ງສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍການຂໍ້ມູນເຂົ້າສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍການຂໍ້ມູນອຸດຄ້າ"/>
+                        <MenuItem Header="ລາຍການຂໍ້ມູນຂະນິດການ"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/icons8_Edit_Property_15px_4.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ສັ່ງຊື້-ນຳເຂົ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- โปรไฟล์ -->
+            <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/customer.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ລູກຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <!-- ตั้งค่า -->
+            <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/sale_Product.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ຂາຍສິນຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/search_Property.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ຄົ້ນຫາສິນຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="toolStripMenuItemReport" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <Button.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuItem Header="ລາຍງານການນຳຕິ່ນສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍງານການເຂົ້າສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍງານຕຸ່ນ"/>
+                        <MenuItem Header="ລາຍງານອຸດລະຍ"/>
+                        <MenuItem Header="ລາຍງານຂາຍ"/>
+                        <MenuItem Header="ລາຍງານອະຮົງກາໂ"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/report_Card.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ລາຍງານ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+            <Button x:Name="toolStripMenuItemProfile" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/profile.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ໂປຟາຍ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <Button.Flyout>
+                    <MenuFlyout Placement="Bottom">
+                        <MenuItem Header="ແກ້ດ້ານເບ້ຍ"/>
+                        <MenuItem Header="ແກ້ດ້ານສຳຍ"/>
+                        <MenuItem Header="ແກ້ດ້ານສ້ນ"/>
+                        <MenuItem Header="ແກ້ດ້ານວອາ"/>
+                    </MenuFlyout>
+                </Button.Flyout>
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/setting.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ຕັ້ງຄ່າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+            <Button x:Name="toolStripMenuItemLogout" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                    <Image Source="/picture/shutdown.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <TextBlock Text="ອອກຈາກລະບົບ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
+                </StackPanel>
+            </Button>
+
+    </StackPanel>
+</UserControl>

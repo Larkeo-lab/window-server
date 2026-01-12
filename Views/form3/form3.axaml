@@ -1,0 +1,137 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="My_program.Views.Form3"
+        Title="Form 3"
+        Width="500"
+        Height="750">
+
+    <Window.Styles>
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Styles>
+
+    <Panel Background="#9DB8D1">
+        <Border Width="400"
+                Height="650"
+                BorderBrush="#4A4A4A"
+                BorderThickness="2"
+                CornerRadius="5"
+                Background="#9DB8D1"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Padding="30">
+            
+            <StackPanel Spacing="20">
+
+                <TextBlock Text="ໂປຣແກຣມຄິດໄລ່ຫາລາຄາສິນຄ້າ"
+                           FontSize="16"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Foreground="#1a1a1a"
+                           Margin="0,0,0,20"/>
+
+                <!-- ราคาสินค้า -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="ລາຄາສິນຄ້າ" FontSize="14" FontWeight="SemiBold" Foreground="#1a1a1a"/>
+                    <TextBox x:Name="PriceTextBox"
+                             Width="350"
+                             Height="35"
+                             BorderBrush="#555555"
+                             BorderThickness="2"
+                             FontSize="14"
+                             Foreground="#000000"/>
+                </StackPanel>
+
+                <!-- จำนวน -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="ຈຳນວນ" FontSize="14" FontWeight="SemiBold" Foreground="#1a1a1a"/>
+                    <TextBox x:Name="QuantityTextBox"
+                             Width="350"
+                             Height="35"
+                             BorderBrush="#555555"
+                             BorderThickness="2"
+                             FontSize="14"
+                             Foreground="#000000"/>
+                </StackPanel>
+
+                <!-- ปุ่ม -->
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="15" Margin="0,10,0,20">
+                    <Button Content="ຄຳນວນ"
+                            Click="CalculateButton_Click"
+                            Width="110"
+                            Height="40"
+                            Background="#1e4d7b"
+                            Foreground="White"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            BorderBrush="#0d2840"
+                            BorderThickness="2"
+                            CornerRadius="5"/>
+                    
+                    <Button Content="ຍົກເລີກ"
+                            Click="ClearButton_Click"
+                            Width="110"
+                            Height="40"
+                            Background="#b22222"
+                            Foreground="White"
+                            FontSize="15"
+                            FontWeight="Bold"
+                            BorderBrush="#8b0000"
+                            BorderThickness="2"
+                            CornerRadius="5"/>
+                </StackPanel>
+
+                <!-- ราคารวม -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="ລາຄາລວມ" FontSize="14" FontWeight="SemiBold" Foreground="#1a1a1a"/>
+                    <TextBox x:Name="TotalTextBox"
+                             Width="350"
+                             Height="35"
+                             Background="#ffffcc"
+                             BorderBrush="#555555"
+                             BorderThickness="2"
+                             FontSize="14"
+                             FontWeight="Bold"
+                             Foreground="#000000"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+                <!-- เงินชำระ -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="ເງີນຊໍາລະ" FontSize="14" FontWeight="SemiBold" Foreground="#1a1a1a"/>
+                    <TextBox x:Name="PaymentTextBox"
+                             Width="350"
+                             Height="35"
+                             BorderBrush="#555555"
+                             BorderThickness="2"
+                             FontSize="14"
+                             Foreground="#000000"
+                             TextChanged="PaymentTextBox_TextChanged"/>
+                </StackPanel>
+
+                <!-- เงินทอน -->
+                <StackPanel Spacing="8">
+                    <TextBlock Text="ເງີນທອນ" FontSize="14" FontWeight="SemiBold" Foreground="#1a1a1a"/>
+                    <TextBox x:Name="ChangeTextBox"
+                             Width="350"
+                             Height="35"
+                             Background="#ccffcc"
+                             BorderBrush="#555555"
+                             BorderThickness="2"
+                             FontSize="14"
+                             FontWeight="Bold"
+                             Foreground="#000000"
+                             IsReadOnly="True"/>
+                </StackPanel>
+
+            </StackPanel>
+        </Border>
+    </Panel>
+</Window>

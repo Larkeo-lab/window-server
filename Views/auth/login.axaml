@@ -1,0 +1,163 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="My_program.Views.Login"
+        Title="ລະບົບ POS"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterScreen"
+        WindowState="Maximized"
+        CanResize="True">
+
+    <Window.Styles>
+        <Style Selector="TextBox">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+        <Style Selector="TextBox:focus /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="White"/>
+            <Setter Property="BorderBrush" Value="#00A6ED"/>
+            <Setter Property="BorderThickness" Value="2"/>
+        </Style>
+        <Style Selector="TextBox:pointerover /template/ Border#PART_BorderElement">
+            <Setter Property="Background" Value="White"/>
+        </Style>
+    </Window.Styles>
+
+    <Panel Background="White">
+        <Border Width="650"
+                Height="500"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center">
+            
+            <StackPanel Spacing="25" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <!-- ไอคอน Lock -->
+                <Border Width="120"
+                        Height="120"
+                        Background="#00A6ED"
+                        CornerRadius="60"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,0,10">
+                    <Viewbox Width="60" Height="60">
+                        <Canvas Width="24" Height="24">
+                            <!-- ไอคอนกุญแจ + Padlock -->
+                            <Path Fill="White" Data="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zM9 6c0-1.66 1.34-3 3-3s3 1.34 3 3v2H9V6zm9 14H6V10h12v10zm-6-3c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/>
+                        </Canvas>
+                    </Viewbox>
+                </Border>
+
+                <!-- ຟອມເຂົ້າໃຊ້ລະບົບ -->
+                <TextBlock Text="ຟອມເຂົ້າໃຊ້ລະບົບ"
+                           FontSize="24"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Foreground="#333333"
+                           Margin="0,0,0,10"/>
+
+                <!-- ບັນຊີຜູ້ໃຊ້ -->
+                <StackPanel Spacing="10" Width="600">
+                    <Border BorderBrush="#E0E0E0"
+                            BorderThickness="0,0,0,2"
+                            Background="Transparent">
+                        <Grid ColumnDefinitions="Auto,*" Height="50">
+                            <!-- ไอคอนผู้ใช้ -->
+                            <Border Width="40" Height="40"
+                                    Background="#FFE5CC"
+                                    CornerRadius="20"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0,15,0">
+                                <Viewbox Width="24" Height="24">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Fill="#FF9800" Data="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                                    </Canvas>
+                                </Viewbox>
+                            </Border>
+                            
+                            <TextBox x:Name="TextUsername"
+                                     Grid.Column="1"
+                                     Watermark="ບັນຊີຜູ້ໃຊ້"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     Foreground="#333333"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- ລະຫັດຜ່ານ -->
+                <StackPanel Spacing="10" Width="600">
+                    <Border BorderBrush="#E0E0E0"
+                            BorderThickness="0,0,0,2"
+                            Background="Transparent">
+                        <Grid ColumnDefinitions="Auto,*" Height="50">
+                            <!-- ไอคอนกุญแจ -->
+                            <Border Width="40" Height="40"
+                                    Background="#FFE5CC"
+                                    CornerRadius="20"
+                                    VerticalAlignment="Center"
+                                    Margin="10,0,15,0">
+                                <Viewbox Width="20" Height="20">
+                                    <Canvas Width="24" Height="24">
+                                        <Path Fill="#FF9800" Data="M12.65 10C11.7 7.31 8.9 5.5 5.77 6.12c-2.29.46-4.15 2.29-4.63 4.58C.32 14.57 3.26 18 7 18c2.61 0 4.83-1.67 5.65-4H17v2c0 1.1.9 2 2 2s2-.9 2-2v-2c1.1 0 2-.9 2-2s-.9-2-2-2h-8.35zM7 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                                    </Canvas>
+                                </Viewbox>
+                            </Border>
+                            
+                            <TextBox x:Name="textPassword"
+                                     Grid.Column="1"
+                                     Watermark="ລະຫັດຜ່ານ"
+                                     PasswordChar="●"
+                                     BorderThickness="0"
+                                     Background="Transparent"
+                                     FontSize="16"
+                                     VerticalAlignment="Center"
+                                     Foreground="#333333"/>
+                        </Grid>
+                    </Border>
+                </StackPanel>
+
+                <!-- ສະແດວະຫັດຜ່ານ + ລືມລະຫັດຜ່ານ -->
+                <Grid Width="600" ColumnDefinitions="*,Auto">
+                    <CheckBox x:Name="ShowPassword"
+                              Content="ສະແດງລະຫັດຜ່ານ"
+                              FontSize="14"
+                              Foreground="#666666"
+                              VerticalAlignment="Center"/>
+                    
+                    <TextBlock Grid.Column="1"
+                               x:Name="ClearDataTextBlock"
+                               Text="ລ້າງຂໍ້ມູນ"
+                               FontSize="14"
+                               Foreground="#00A6ED"
+                               VerticalAlignment="Center"
+                               Cursor="Hand"/>
+                </Grid>
+
+                <!-- ປຸ່ມເຂົ້າໃຊ້ລະບົບ -->
+                <Button x:Name="ButtonLogin"
+                        Content="ເຂົ້າໃຊ້ລະບົບ"
+                        Width="600"
+                        Height="55"
+                        Background="#00A6ED"
+                        Foreground="White"
+                        FontSize="18"
+                        FontWeight="Bold"
+                        BorderThickness="0"
+                        CornerRadius="8"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        Cursor="Hand">
+                    <Button.Styles>
+                        <Style Selector="Button:pointerover">
+                            <Setter Property="Background" Value="#0096D6"/>
+                        </Style>
+                        <Style Selector="Button:pressed">
+                            <Setter Property="Background" Value="#0086C0"/>
+                        </Style>
+                    </Button.Styles>
+                </Button>
+
+            </StackPanel>
+        </Border>
+    </Panel>
+</Window>
