@@ -8,7 +8,7 @@
         <!-- หน้าหลัก -->
             <Button x:Name="toolStripMenuItemHome"  Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/home_Page.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/home_Page.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ໜ້າລັກ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -27,7 +27,7 @@
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/add_Database.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/add_Database.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ຈັດການຂໍ້ມູນ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -46,7 +46,7 @@
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/icons8_Edit_Property_15px_4.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/icons8_Edit_Property_15px_4.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ສັ່ງຊື້-ນຳເຂົ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -54,7 +54,7 @@
             <!-- โปรไฟล์ -->
             <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/customer.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/customer.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ລູກຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -62,14 +62,14 @@
             <!-- ตั้งค่า -->
             <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/sale_Product.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/sale_Product.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ຂາຍສິນຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
 
             <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/search_Property.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/search_Property.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ຄົ້ນຫາສິນຄ້າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -85,13 +85,13 @@
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/report_Card.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/report_Card.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ລາຍງານ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
             <Button x:Name="toolStripMenuItemProfile" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/profile.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/profile.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ໂປຟາຍ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
@@ -106,14 +106,14 @@
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/setting.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/setting.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ຕັ້ງຄ່າ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
 
             <Button x:Name="toolStripMenuItemLogout" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
-                    <Image Source="/picture/shutdown.png" Width="24" Height="24" Margin="0,0,5,0"/>
+                    <Image Source="/Assets/Images/shutdown.png" Width="24" Height="24" Margin="0,0,5,0"/>
                     <TextBlock Text="ອອກຈາກລະບົບ" Foreground="White" VerticalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Button>
