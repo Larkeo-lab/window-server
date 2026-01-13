@@ -11,6 +11,7 @@
   
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
         
         <!-- Global Font Style สำหรับทั้งแอปพลิเคชัน -->
         <Style Selector="TextBlock">

@@ -37,7 +37,7 @@
                            Spacing="10">
                     
                     <!-- ปุ่มเพิ่ม (สีน้ำเงิน) -->
-                    <Button x:Name="btnAdd" 
+                    <Button x:Name="buttonAdd" 
                            x:FieldModifier="public"
                            Content="ເພີ່ມ" 
                            Width="80" Height="40"
@@ -49,7 +49,7 @@
                            Cursor="Hand"/>
 
                     <!-- ปุ่มแก้ไข (สีเหลือง) -->
-                    <Button x:Name="btnEdit" 
+                    <Button x:Name="buttonEdit" 
                            x:FieldModifier="public"
                            Content="ແກ້ໄຂ" 
                            Width="80" Height="40"
@@ -61,7 +61,7 @@
                            Cursor="Hand"/>
 
                     <!-- ปุ่มลบ (สีแดง) -->
-                    <Button x:Name="btnDelete" 
+                    <Button x:Name="buttonDelete" 
                            x:FieldModifier="public"
                            Content="ລົບ" 
                            Width="80" Height="40"
@@ -73,7 +73,7 @@
                            Cursor="Hand"/>
 
                     <!-- ปุ่มยกเลิก (สีเทา) -->
-                    <Button x:Name="btnCancel" 
+                    <Button x:Name="buttonCancel" 
                            x:FieldModifier="public"
                            Content="ຍົກເລີກ" 
                            Width="80" Height="40"
@@ -112,18 +112,62 @@
                          AutoGenerateColumns="False"
                          CanUserReorderColumns="True"
                          CanUserResizeColumns="True"
+                         CanUserSortColumns="False"
+                         SelectionMode="Single"
                          GridLinesVisibility="All"
-                         BorderBrush="Gray"
+                         BorderBrush="#DDDDDD"
                          BorderThickness="1"
                          IsReadOnly="True"
                          HeadersVisibility="Column"
                          Height="500">
                     
+                    <DataGrid.Styles>
+                        <!-- สไตล์สำหรับแถว -->
+                        <Style Selector="DataGridRow">
+                            <Setter Property="Background" Value="White"/>
+                            <Setter Property="Foreground" Value="Black"/>
+                        </Style>
+                        <Style Selector="DataGridRow:nth-child(2n)">
+                            <Setter Property="Background" Value="#F8F9FA"/>
+                        </Style>
+                        <Style Selector="DataGridRow:pointerover">
+                            <Setter Property="Background" Value="#E3F2FD"/>
+                        </Style>
+                        <Style Selector="DataGridRow:selected /template/ Border#BackgroundBorder">
+                            <Setter Property="Background" Value="#2196F3"/>
+                        </Style>
+                        
+                        <!-- สไตล์สำหรับเซลล์ -->
+                        <Style Selector="DataGridCell">
+                            <Setter Property="Foreground" Value="Black"/>
+                            <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                            <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                            <Setter Property="Padding" Value="10,8"/>
+                        </Style>
+                        <Style Selector="DataGridCell:selected">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                        
+                        <!-- สไตล์สำหรับ Header -->
+                        <Style Selector="DataGridColumnHeader">
+                            <Setter Property="Background" Value="#424242"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="FontWeight" Value="Bold"/>
+                            <Setter Property="FontSize" Value="15"/>
+                            <Setter Property="Padding" Value="12,10"/>
+                            <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                        </Style>
+                    </DataGrid.Styles>
+                    
                     <DataGrid.Columns>
                         <!-- คอลัมน์ลำดับ -->
                         <DataGridTextColumn Header="ລຳດັບ" 
-                                          Width="100"
+                                          Width="150"
                                           Binding="{Binding Index}"/>
+
+                        <DataGridTextColumn Header="ລະຫັດ" 
+                                          Width="150"
+                                          Binding="{Binding Id}"/>
 
                         <!-- คอลัมน์ชื่อยี่ห้อ -->
                         <DataGridTextColumn Header="ຊື່ຍີ່ຫໍ" 
