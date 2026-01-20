@@ -164,11 +164,6 @@
                         <DataGridTextColumn Header="ລຳດັບ" 
                                           Width="150"
                                           Binding="{Binding Index}"/>
-
-                        <DataGridTextColumn Header="ລະຫັດ" 
-                                          Width="150"
-                                          Binding="{Binding Id}"/>
-
                         <!-- คอลัมน์ชื่อยี่ห้อ -->
                         <DataGridTextColumn Header="ຊື່ຍີ່ຫໍ" 
                                           Width="*"
