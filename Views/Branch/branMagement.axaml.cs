@@ -2,6 +2,7 @@ using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading.Tasks;
 using My_program.Views.helper;
 using MySql.Data.MySqlClient;
 
@@ -29,6 +30,10 @@ namespace My_program.Views
             // ผูก event handler สำหรับ DataGrid SelectionChanged
             dgBrands.SelectionChanged -= DgBrands_SelectionChanged;
             dgBrands.SelectionChanged += DgBrands_SelectionChanged;
+            
+            // ผูก event handler สำหรับ txtSearch TextChanged
+            txtSearch.TextChanged -= TxtSearch_TextChanged;
+            txtSearch.TextChanged += TxtSearch_TextChanged;
         }
         
         private void ButtonCancel_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -253,6 +258,70 @@ namespace My_program.Views
             }
         }
 
+        private async void TxtSearch_TextChanged(object? sender, TextChangedEventArgs e)
+        {
+            // ดึงค่าจาก txtSearch
+            string searchText = txtSearch.Text?.Trim() ?? "";
+            
+            // ถ้าค่าว่าง ให้โหลดข้อมูลทั้งหมด
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                LoadDataFromDatabase();
+                return;
+            }
+            
+            // ค้นหาข้อมูลจากฐานข้อมูล
+            await SearchBrandsFromDatabase(searchText);
+        }
+        
+        private async Task SearchBrandsFromDatabase(string searchText)
+        {
+            Brands = new ObservableCollection<BrandModel>();
+            
+            var con = new Connection_db();
+
+            try
+            {
+                // เปิดการเชื่อมต่อ
+                await con.connectdb.OpenAsync();
+                
+                // ใช้ LIKE สำหรับค้นหา (ตัวหน้า ตัวหลัง หรือตรงกลางก็ได้) และไม่สนใจ case
+                string sql = "SELECT brand_id, brand_name FROM brand WHERE LOWER(brand_name) LIKE LOWER(@searchText) ORDER BY brand_id ASC";
+                MySqlCommand cmd = new MySqlCommand(sql, con.connectdb);
+                cmd.Parameters.AddWithValue("@searchText", $"%{searchText}%");
+                
+                using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
+                {
+                    int index = 1;
+                    while (await reader.ReadAsync())
+                    {
+                        Brands.Add(new BrandModel
+                        {
+                            Id = reader.GetInt32("brand_id"),
+                            Index = index++,
+                            BrandName = reader.GetString("brand_name")
+                        });
+                    }
+                }
+                
+                // ปิดการเชื่อมต่อ
+                con.connectdb.Close();
+                
+                Console.WriteLine($"🔍 พบข้อมูล {Brands.Count} รายการจากการค้นหา: {searchText}");
+
+                // ผูกข้อมูลกับ DataGrid
+                var dataGrid = this.Find<DataGrid>("dgBrands");
+                if (dataGrid != null)
+                {
+                    dataGrid.ItemsSource = Brands;
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error searching data: {ex.Message}");
+            }
+        }
+
         private async void LoadDataFromDatabase()
         {
             Brands = new ObservableCollection<BrandModel>();
@@ -299,6 +368,7 @@ namespace My_program.Views
                     txtBrandName.Text = string.Empty;
                     Console.WriteLine($"✅ ລ້າງຂໍ້ມູນໃນ TextBox ແລ້ວ");
                 }
+
             }
             catch (Exception ex)
             {
