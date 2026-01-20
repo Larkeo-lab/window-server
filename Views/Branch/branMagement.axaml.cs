@@ -21,6 +21,8 @@ namespace My_program.Views
             buttonAdd.Click += ButtonAdd_Click;
             buttonEdit.Click -= ButtonEdit_Click;
             buttonEdit.Click += ButtonEdit_Click;
+            buttonDelete.Click -= ButtonDelete_Click;
+            buttonDelete.Click += ButtonDelete_Click;
             buttonCancel.Click -= ButtonCancel_Click;
             buttonCancel.Click += ButtonCancel_Click;
             
@@ -173,6 +175,77 @@ namespace My_program.Views
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Error updating brand: {ex.Message}");
+                if (parentWindow != null)
+                {
+                    await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, $"ເກີດຂໍ້ຜິດພາດ: {ex.Message}");
+                }
+            }
+        }
+
+        private async void ButtonDelete_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            // หา parent window ก่อนเพื่อใช้ในทั้ง method
+            var parentWindow = TopLevel.GetTopLevel(this) as Window;
+            
+            // ตรวจสอบว่ามีการเลือกแถวในตารางหรือไม่
+            if (dgBrands.SelectedItem == null)
+            {
+                if (parentWindow != null)
+                {
+                    await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, "ກະລຸນາເລືອກຂໍ້ມູນໃນຕາຕະລາງກ່ອນ");
+                }
+                return;
+            }
+            
+            // ดึงข้อมูลที่เลือก
+            var selectedBrand = dgBrands.SelectedItem as BrandModel;
+            if (selectedBrand == null) return;
+            
+            // แสดงหน้าต่างยืนยัน
+            if (parentWindow != null)
+            {
+                var result = await ShowConfirmationDialogHelper.ShowConfirmationDialog(parentWindow, $"ຕ້ອງການລືບຍີ່ຫໍ້ '{selectedBrand.BrandName}' ແທ້ບໍ່?");
+                if (!result)
+                {
+                    return;
+                }
+            }
+            
+            try
+            {
+                // ลบข้อมูลจากฐานข้อมูล
+                var con = new Connection_db();
+                await con.connectdb.OpenAsync();
+                string sql = "DELETE FROM brand WHERE brand_id = @brand_id";
+                MySqlCommand cmd = new MySqlCommand(sql, con.connectdb);
+                cmd.Parameters.AddWithValue("@brand_id", selectedBrand.Id);
+                
+                int rowsAffected = await cmd.ExecuteNonQueryAsync();
+                con.connectdb.Close();
+                
+                if (rowsAffected > 0)
+                {
+                    if (parentWindow != null)
+                    {
+                        await ShowSuccessDialogHelper.ShowSuccessDialog(parentWindow, "ລືບຂໍ້ມູນສຳເລັດ");
+                    }
+                    
+                    // โหลดข้อมูลใหม่เพื่ออัพเดท DataGrid
+                    LoadDataFromDatabase();
+                    
+                    Console.WriteLine($"✅ Deleted brand ID {selectedBrand.Id}: {selectedBrand.BrandName}");
+                }
+                else
+                {
+                    if (parentWindow != null)
+                    {
+                        await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, "ບໍ່ສາມາດລືບຂໍ້ມູນໄດ້");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error deleting brand: {ex.Message}");
                 if (parentWindow != null)
                 {
                     await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, $"ເກີດຂໍ້ຜິດພາດ: {ex.Message}");
