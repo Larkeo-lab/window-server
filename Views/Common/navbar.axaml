@@ -17,13 +17,12 @@
             <Button x:Name="toolStripMenuItemData" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuItem x:Name="menuBrandManagement" Header="ຈັດການຂໍ້ມູນຍີ່ຫໍ"/>
-                        <MenuItem Header="ຈັດการຂໍ້ມູນຜິດ"/>
-                        <MenuItem Header="ຈັດการຂໍ້ມູນປະເພດສິນค้า"/>
-                        <MenuItem Header="ຈັດการຂໍ້ມູນສິນค้า"/>
-                        <MenuItem Header="ຈັດการຂໍ້ມູນຜະນັກງານ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນສັດຕະນາຄານປະປ່ວນ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນຜູ່ຄູ່ະເຄົາ"/>
+                        <MenuItem x:Name="menuBrandManagement" Header="ຈັດການຂໍ້ມູນຍີ່ຫໍ້"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນປະເພດສິນຄ້າ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນສິນຄ້າ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນຜະນັກງານ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນອັດຕາແລກປ່ຽນ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນຜູ່ສະຫນອງ"/>
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -36,13 +35,8 @@
             <Button x:Name="toolStripMenuItemOrder" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuItem Header="ຈັດການຂໍ້ມູນສັ່ງເຄື່ອງສັ່ງຄ້າ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນຕຸ່ນສິນຄ້າ"/>
-                        <Separator/>
-                        <MenuItem Header="ອາຍການຂໍ້ມູນສັ່ງສິນຄ້າ"/>
-                        <MenuItem Header="ລາຍການຂໍ້ມູນເຂົ້າສິນຄ້າ"/>
-                        <MenuItem Header="ລາຍການຂໍ້ມູນອຸດຄ້າ"/>
-                        <MenuItem Header="ລາຍການຂໍ້ມູນຂະນິດການ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນສັ່ງຊື່ສິນຄ້າ"/>
+                        <MenuItem Header="ຈັດການຂໍ້ມູນນຳເຂົ້າສິນຄ້າ"/>
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -76,12 +70,14 @@
             <Button x:Name="toolStripMenuItemReport" Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuItem Header="ລາຍງານການນຳຕິ່ນສິນຄ້າ"/>
-                        <MenuItem Header="ລາຍງານການເຂົ້າສິນຄ້າ"/>
-                        <MenuItem Header="ລາຍງານຕຸ່ນ"/>
-                        <MenuItem Header="ລາຍງານອຸດລະຍ"/>
-                        <MenuItem Header="ລາຍງານຂາຍ"/>
-                        <MenuItem Header="ລາຍງານອະຮົງກາໂ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນການຂາຍ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນສິນຄ້າໃນຮ້ານ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນສິນຄ້າໃກ້ຫມົດ"/>
+                        <MenuItem Header="ໃບບິນ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນສັ່ງຊື່ສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນນຳເຂົ້າສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນສິນຄ້າ"/>
+                        <MenuItem Header="ລາຍງານຂໍ້ມູນພະນັກງານ"/>
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
@@ -99,10 +95,10 @@
             <Button Margin="5" Padding="5,2" Background="Transparent" BorderBrush="Transparent">
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
-                        <MenuItem Header="ແກ້ດ້ານເບ້ຍ"/>
-                        <MenuItem Header="ແກ້ດ້ານສຳຍ"/>
-                        <MenuItem Header="ແກ້ດ້ານສ້ນ"/>
-                        <MenuItem Header="ແກ້ດ້ານວອາ"/>
+                        <MenuItem Header="ເມນູດ້ານເທິງ"/>
+                        <MenuItem Header="ເມນູດ້ານຊາຍ"/>
+                        <MenuItem Header="ເມນູດ້ານລຸ່ມ"/>
+                        <MenuItem Header="ເມນູດ້ານຂວາ"/>
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">

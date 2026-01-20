@@ -60,19 +60,6 @@ namespace My_program.Views
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Error loading data: {ex.Message}");
-                
-                // ถ้าเกิด error ให้ใช้ข้อมูลตัวอย่าง
-                Brands = new ObservableCollection<BrandModel>
-                {
-                    new BrandModel { Id = 1, Index = 1, BrandName = "ຊີຊະນຸ (ຂໍ້ມູນຕົວຢ່າງ)" },
-                    new BrandModel { Id = 2, Index = 2, BrandName = "ແວບສີ (ຂໍ້ມູນຕົວຢ່າງ)" }
-                };
-                
-                var dataGrid = this.Find<DataGrid>("dgBrands");
-                if (dataGrid != null)
-                {
-                    dataGrid.ItemsSource = Brands;
-                }
             }
         }
     }
