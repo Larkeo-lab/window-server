@@ -165,6 +165,7 @@
                                           Width="150"
                                           Binding="{Binding Index}"/>
                         <!-- คอลัมน์ชื่อยี่ห้อ -->
+                        
                         <DataGridTextColumn Header="ຊື່ຍີ່ຫໍ" 
                                           Width="*"
                                           Binding="{Binding BrandName}"/>
