@@ -68,6 +68,17 @@ namespace My_program.Views
             {
                 menuBrandManagement.Click += MenuBrandManagement_Click;
             }
+
+            var menuCategoryManagement = this.FindControl<MenuItem>("menuCategoryManagement");
+            if (menuCategoryManagement != null)
+            {
+                menuCategoryManagement.Click += MenuCategoryManagement_Click;
+            }
+            var menuProductManagement = this.FindControl<MenuItem>("menuProductManagement");
+            if (menuProductManagement != null)
+            {
+                menuProductManagement.Click += MenuProductManagement_Click;
+            }
         }
 
         private void BtnHome_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
@@ -90,6 +101,18 @@ namespace My_program.Views
         {
             // เรียก ShowPage ของ MainForm พร้อมแสดงหน้า branMagement
             _mainForm?.ShowPage(new branMagement());
+        }
+
+        private void MenuCategoryManagement_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            // เรียก ShowPage ของ MainForm พร้อมแสดงหน้า categoryManagement
+            _mainForm?.ShowPage(new categoryManagement());
+        }
+
+        private void MenuProductManagement_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            // เรียก ShowPage ของ MainForm พร้อมแสดงหน้า product
+            _mainForm?.ShowPage(new Product());
         }
 
         private async void BtnLogout_Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)

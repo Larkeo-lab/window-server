@@ -18,11 +18,11 @@
                 <Button.Flyout>
                     <MenuFlyout Placement="Bottom">
                         <MenuItem x:Name="menuBrandManagement" Header="ຈັດການຂໍ້ມູນຍີ່ຫໍ້"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນປະເພດສິນຄ້າ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນສິນຄ້າ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນຜະນັກງານ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນອັດຕາແລກປ່ຽນ"/>
-                        <MenuItem Header="ຈັດການຂໍ້ມູນຜູ່ສະຫນອງ"/>
+                        <MenuItem x:Name="menuCategoryManagement" Header="ຈັດການຂໍ້ມູນປະເພດສິນຄ້າ"/>
+                        <MenuItem x:Name="menuProductManagement" Header="ຈັດການຂໍ້ມູນສິນຄ້າ"/>
+                        <MenuItem x:Name="menuEmployeeManagement" Header="ຈັດການຂໍ້ມູນຜະນັກງານ"/>
+                        <MenuItem x:Name="menuShiftManagement" Header="ຈັດການຂໍ້ມູນອັດຕາແລກປ່ຽນ"/>
+                        <MenuItem x:Name="menuBranchManagement" Header="ຈັດການຂໍ້ມູນຜູ່ສະຫນອງ"/>
                     </MenuFlyout>
                 </Button.Flyout>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
