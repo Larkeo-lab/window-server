@@ -1,5 +1,6 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:My_program.Views"
              x:Class="My_program.Views.Product"
              Background="White">
 
@@ -21,207 +22,116 @@
 
         <!-- ส่วนบน: ฟອร์มจัดการข้อมูลสินค้า -->
         <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" 
-                CornerRadius="5" Padding="20" Margin="0,0,0,10" Background="WhiteSmoke">
-            <StackPanel>
-                        <!-- แถวที่ 1: รหัสสินค้า, จำนวนคงเหลือ, ยี่ห้อ -->
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+        CornerRadius="5" Padding="20,15,20,15" Margin="0,0,0,10" Background="WhiteSmoke">
+    <StackPanel>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ລະຫັດສິນຄ້າ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="txtPro_id" Height="35" />
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ຈຳນວນຕຳສຸດ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="txtQtyMin" Height="35" />
+            </StackPanel>
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ຍີ່ຫໍ້" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <ComboBox x:Name="comboBrand" Height="35" HorizontalAlignment="Stretch" PlaceholderText="--ເລືອກຍິ່ຫໍ--">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:BrandModel">
+                            <TextBlock Text="{Binding BrandName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
 
-                            <!-- รหัสสินค้า -->
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="ລະຫັດສິນຄ້າ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtProductCode" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ລະຫັດ..."/>
-                            </StackPanel>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ຊື່ສິນຄ້າ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="txtProName" Height="35" Foreground="Black"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ລາຄາຕົ້ນທຶນ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="textCost_price" Height="35"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ປະເພດ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <ComboBox x:Name="comboCategory" Height="35" HorizontalAlignment="Stretch" PlaceholderText="--ເລືອກປະເພດ--">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:CategoryModel">
+                            <TextBlock Text="{Binding CategoryName}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
 
-                            <!-- จำนวนคงเหลือ -->
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="ຈຳນວນຕຳສຸດ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtRemainingStock" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ຈຳນວນ..."/>
-                            </StackPanel>
+        <Grid Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/><ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ຫົວໜ່ວຍ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="textUnit" Height="35" Foreground="Black"/>
+            </StackPanel>
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ລາຄາຂາຍ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="textRetail_price" Height="35"/>
+            </StackPanel>
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ສະຖານະ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <ComboBox x:Name="comboStatus" Height="35" HorizontalAlignment="Stretch" PlaceholderText="--ເລືອກສະຖານະ--">
+                   <ComboBoxItem Content="ມີ"/>
+                   <ComboBoxItem Content="ບໍ່ມີ"/>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
 
-                            <!-- ยี่ห้อ -->
-                            <StackPanel Grid.Column="4">
-                                <TextBlock Text="ຍີ່ຫໍ້" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <ComboBox x:Name="cmbBrand" 
-                                          x:FieldModifier="public"
-                                          Height="35" 
-                                          FontSize="14"
-                                          PlaceholderText="ເລືອກ..."/>
-                            </StackPanel>
-                        </Grid>
+        <Grid Margin="0,0,0,5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/> 
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
 
-                        <!-- แถวที่ 2: ชื่อสินค้า, ราคาต้นทุนอื่นๆ, ประเภท -->
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ຈຳນວນ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
+                <TextBox x:Name="textQty" Height="35" FontSize="14" Watermark="ຈຳນວນ..."/>
+            </StackPanel>
 
-                            <!-- ชื่อสินค้า -->
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="ຊື່ສິນຄ້າ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtProductName" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ຊື່..."/>
-                            </StackPanel>
+            <StackPanel Grid.Column="2" 
+                        Orientation="Horizontal" 
+                        VerticalAlignment="Bottom" 
+                        HorizontalAlignment="Left"
+                        Spacing="8">
+                
+                <Button x:Name="buttonAdd" Content="ເພີ່ມ" Width="85" Height="35" 
+                        Background="#007BFF" Foreground="White" FontSize="14" FontWeight="SemiBold" CornerRadius="4" Cursor="Hand"/>
 
-                            <!-- ราคาต้นทุนอื่นๆ -->
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="ລາຄາຕົ້ນທຶນ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtOtherCost" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ລາຄາ..."/>
-                            </StackPanel>
+                <Button x:Name="buttonEdit" Content="ແກ້ໄຂ" Width="85" Height="35" 
+                        Background="#FFC107" Foreground="White" FontSize="14" FontWeight="SemiBold" CornerRadius="4" Cursor="Hand"/>
 
-                            <!-- ประเภท -->
-                            <StackPanel Grid.Column="4">
-                                <TextBlock Text="ປະເພດ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <ComboBox x:Name="cmbCategory" 
-                                          x:FieldModifier="public"
-                                          Height="35" 
-                                          FontSize="14"
-                                          PlaceholderText="ເລືອກ..."/>
-                            </StackPanel>
-                        </Grid>
+                <Button x:Name="buttonDelete" Content="ລົບ" Width="85" Height="35" 
+                        Background="#DC3545" Foreground="White" FontSize="14" FontWeight="SemiBold" CornerRadius="4" Cursor="Hand"/>
 
-                        <!-- แถวที่ 3: ขนาดบรรจุ, ราคาซื้อ, หมวดหมู่ -->
-                        <Grid Margin="0,0,0,15">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- ขนาดบรรจุ -->
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="ຫົວໜ່ວຍ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtPackageSize" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ຫົວໜ່ວຍ..."/>
-                            </StackPanel>
-
-                            <!-- ราคาซื้อ -->
-                            <StackPanel Grid.Column="2">
-                                <TextBlock Text="ລາຄາຂາຍ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtPurchasePrice" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ລາຄາ..."/>
-                            </StackPanel>
-
-                            <!-- หมวดหมู่ -->
-                            <StackPanel Grid.Column="4">
-                                <TextBlock Text="ສະຖານະ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <ComboBox x:Name="cmbType" 
-                                          x:FieldModifier="public"
-                                          Height="35" 
-                                          FontSize="14"
-                                          PlaceholderText="ເລືອກ..."/>
-                            </StackPanel>
-                        </Grid>
-
-                        <!-- แถวที่ 4: ขนาดกล่อง, ราคาขาย -->
-                        <Grid Margin="0,0,0,20">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="10"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <!-- ขนาดกล่อง -->
-                            <StackPanel Grid.Column="0">
-                                <TextBlock Text="ຈຳນວນ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
-                                <TextBox x:Name="txtBoxSize" 
-                                         x:FieldModifier="public"
-                                         Height="35" 
-                                         FontSize="14"
-                                         Watermark="ຈຳນວນ..."/>
-                            </StackPanel>
-                        </Grid>
-
-                        <!-- ปุ่มต่างๆ -->
-                        <StackPanel Orientation="Horizontal" 
-                                    HorizontalAlignment="Center"
-                                    Spacing="15">
-                            
-                            <!-- ปุ่มเพิ่ม (สีน้ำเงิน) -->
-                            <Button x:Name="buttonAdd" 
-                                    x:FieldModifier="public"
-                                    Content="ເພີ່ມ" 
-                                    Width="100" Height="40"
-                                    Background="#007BFF" 
-                                    Foreground="White"
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    CornerRadius="3"
-                                    Cursor="Hand"/>
-
-                            <!-- ปุ่มแก้ไข (สีเหลือง) -->
-                            <Button x:Name="buttonEdit" 
-                                    x:FieldModifier="public"
-                                    Content="ແກ້ໄຂ" 
-                                    Width="100" Height="40"
-                                    Background="#FFC107" 
-                                    Foreground="White"
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    CornerRadius="3"
-                                    Cursor="Hand"/>
-
-                            <!-- ปุ่มลบ (สีแดง) -->
-                            <Button x:Name="buttonDelete" 
-                                    x:FieldModifier="public"
-                                    Content="ລົບ" 
-                                    Width="100" Height="40"
-                                    Background="#DC3545" 
-                                    Foreground="White"
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    CornerRadius="3"
-                                    Cursor="Hand"/>
-
-                            <!-- ปุ่มยกเลิก (สีเทา) -->
-                            <Button x:Name="buttonCancel" 
-                                    x:FieldModifier="public"
-                                    Content="ຍົກເລີກ" 
-                                    Width="100" Height="40"
-                                    Background="#6C757D" 
-                                    Foreground="White"
-                                    FontSize="16"
-                                    FontWeight="Bold"
-                                    CornerRadius="3"
-                                    Cursor="Hand"/>
-                        </StackPanel>
-                    </StackPanel>
-                </Border>
+                <Button x:Name="buttonCancel" Content="ຍົກເລີກ" Width="85" Height="35" 
+                        Background="#6C757D" Foreground="White" FontSize="14" FontWeight="SemiBold" CornerRadius="4" Cursor="Hand"/>
+            </StackPanel>
+        </Grid>
+    </StackPanel>
+</Border>
 
                 <!-- ส่วนล่าง: ตารางแสดงข้อมูล -->
                 <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" 

@@ -21,6 +21,20 @@ namespace My_program.Helpers
             {
                 if (sender is TextBox tb)
                 {
+                    // ป้องกันการพิมพ์จุดทศนิยมซ้ำ
+                    if (!integerOnly && e.Text == "." && !string.IsNullOrEmpty(tb.Text) && tb.Text.Contains("."))
+                    {
+                        e.Handled = true; // บล็อคการพิมพ์จุดซ้ำ
+                        return;
+                    }
+                    
+                    // ป้องกันการพิมพ์จุดถ้าเป็น integerOnly
+                    if (integerOnly && e.Text == ".")
+                    {
+                        e.Handled = true;
+                        return;
+                    }
+                    
                     Dispatcher.UIThread.Post(() =>
                     {
                         NumberFormat(tb, integerOnly);
@@ -94,14 +108,21 @@ namespace My_program.Helpers
             string[] splittedNum = inputNum.Split('.');
             string decimalNum = "";
 
-            // แยกส่วนทศนิยม
-            if (!integerOnly && splittedNum.Length == 2)
+            // แยกส่วนทศนิยม (รองรับเฉพาะจุดเดียว)
+            if (!integerOnly && splittedNum.Length >= 2)
             {
+                // ถ้ามีจุดหลายตัว เอาแค่ส่วนแรกและส่วนที่สอง (ตัดส่วนที่เกินทิ้ง)
                 inputNum = splittedNum[0];
                 decimalNum = "." + splittedNum[1];
             }
             else if (integerOnly)
             {
+                // ถ้าเป็น integerOnly ให้เอาเฉพาะส่วนแรก (ไม่มีทศนิยม)
+                inputNum = splittedNum[0];
+            }
+            else if (splittedNum.Length == 1)
+            {
+                // ไม่มีจุดทศนิยม
                 inputNum = splittedNum[0];
             }
 
