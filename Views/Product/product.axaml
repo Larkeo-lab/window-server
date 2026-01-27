@@ -1,14 +1,232 @@
 <UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="My_program.Views.Product"
-             Background="White">    
+             Background="White">
 
-    <Grid>
-        <TextBlock Text="ໜ້າສິນຄ້າ (Product)"
-                   FontSize="32"
-                   FontWeight="Bold"
-                   HorizontalAlignment="Center"
-                   VerticalAlignment="Center"
-                   Foreground="#1e4d7b"/>
-    </Grid>
-</UserControl>
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- ส่วนหัวเรื่อง -->
+        <TextBlock Grid.Row="0" 
+                   Text="ຈັດການຂໍ້ມູນສິນຄ້າ" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   Foreground="Black"
+                   Margin="0,0,0,20" 
+                   HorizontalAlignment="Left"/>
+
+        <!-- ส่วนบน: ฟອร์มจัดการข้อมูลสินค้า -->
+       <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="1" 
+        CornerRadius="5" Padding="20" Margin="0,0,0,10" Background="WhiteSmoke">
+    <StackPanel>
+        <Grid Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ລະຫັດສິນຄ້າ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtProductCode" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ຈຳນວນຕຳສຸດ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtRemainingStock" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ຍີ່ຫໍ້" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <ComboBox x:Name="cmbBrand" Height="35" HorizontalAlignment="Stretch" PlaceholderText="ເລືອກ..."/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ຊື່ສິນຄ້າ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtProductName" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ລາຄາຕົ້ນທຶນ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtOtherCost" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ປະເພດ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <ComboBox x:Name="cmbCategory" Height="35" HorizontalAlignment="Stretch" PlaceholderText="ເລືອກ..."/>
+            </StackPanel>
+        </Grid>
+
+        <Grid Margin="0,0,0,15">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="ຫົວໜ່ວຍ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtPackageSize" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="2">
+                <TextBlock Text="ລາຄາຂາຍ" FontSize="14" Margin="0,0,0,5" Foreground="Black"/>
+                <TextBox x:Name="txtPurchasePrice" Height="35" HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="4">
+                <TextBlock Text="ສະຖານະ" FontSize="14" Margin="0,0,0,5" Foreground="Black"  />
+                <ComboBox x:Name="cmbType" Height="35" HorizontalAlignment="Stretch" PlaceholderText="ເລືອກ..."/>
+            </StackPanel>
+        </Grid>
+        
+        </StackPanel>
+</Border>
+
+                <!-- ส่วนล่าง: ตารางแสดงข้อมูล -->
+                <Border Grid.Row="2" BorderBrush="Gray" BorderThickness="1" 
+                        CornerRadius="5" Padding="20" Background="White">
+                    <StackPanel>
+                    <!-- TextBox สำหรับค้นหา -->
+                    <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                        <TextBlock Text="ຄົ້ນຫາ" 
+                                   FontSize="16" 
+                                   VerticalAlignment="Center"
+                                   Margin="0,0,10,0"
+                                   Foreground="Black"/>
+                        <TextBox x:Name="txtSearch" 
+                                 x:FieldModifier="public"
+                                 Width="300" 
+                                 Height="35"
+                                 FontSize="14"
+                                 Watermark="ຄົ້ນຫາສິນຄ້າ..."/>
+                    </StackPanel>
+
+                    <!-- DataGrid สำหรับแสดงข้อมูล -->
+                    <DataGrid x:Name="dgProducts" 
+                              x:FieldModifier="public"
+                              x:CompileBindings="False"
+                              AutoGenerateColumns="False"
+                              CanUserReorderColumns="True"
+                              CanUserResizeColumns="True"
+                              CanUserSortColumns="False"
+                              SelectionMode="Single"
+                              GridLinesVisibility="All"
+                              BorderBrush="#DDDDDD"
+                              BorderThickness="1"
+                              IsReadOnly="True"
+                              HeadersVisibility="Column"
+                              Height="500">
+                        
+                        <DataGrid.Styles>
+                            <!-- สไตล์สำหรับแถว -->
+                            <Style Selector="DataGridRow">
+                                <Setter Property="Background" Value="White"/>
+                                <Setter Property="Foreground" Value="Black"/>
+                            </Style>
+                            <Style Selector="DataGridRow:nth-child(2n)">
+                                <Setter Property="Background" Value="#F8F9FA"/>
+                            </Style>
+                            <Style Selector="DataGridRow:pointerover">
+                                <Setter Property="Background" Value="#E3F2FD"/>
+                            </Style>
+                            <Style Selector="DataGridRow:selected /template/ Border#BackgroundBorder">
+                                <Setter Property="Background" Value="#2196F3"/>
+                            </Style>
+                            
+                            <!-- สไตล์สำหรับเซลล์ -->
+                            <Style Selector="DataGridCell">
+                                <Setter Property="Foreground" Value="Black"/>
+                                <Setter Property="BorderBrush" Value="#E0E0E0"/>
+                                <Setter Property="BorderThickness" Value="0,0,1,1"/>
+                                <Setter Property="Padding" Value="10,8"/>
+                            </Style>
+                            <Style Selector="DataGridCell:selected">
+                                <Setter Property="Foreground" Value="White"/>
+                            </Style>
+                            
+                            <!-- สไตล์สำหรับ Header -->
+                            <Style Selector="DataGridColumnHeader">
+                                <Setter Property="Background" Value="#FFA500"/>
+                                <Setter Property="Foreground" Value="White"/>
+                                <Setter Property="FontWeight" Value="Bold"/>
+                                <Setter Property="FontSize" Value="14"/>
+                                <Setter Property="Padding" Value="12,10"/>
+                                <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                            </Style>
+                        </DataGrid.Styles>
+                        
+                        <DataGrid.Columns>
+                            <!-- คอลัมน์รหัสสินค้า -->
+                            <DataGridTextColumn Header="ລະຫັດສິນຄ້າ" 
+                                              Width="100"
+                                              Binding="{Binding ProductCode}"/>
+                            
+                            <!-- คอลัมน์ชื่อสินค้า -->
+                            <DataGridTextColumn Header="ຊື່ສິນຄ້າ" 
+                                              Width="150"
+                                              Binding="{Binding ProductName}"/>
+                            
+                            <!-- คอลัมน์ขนาดบรรจุ -->
+                            <DataGridTextColumn Header="ຂະໜາດບັນຈຸ" 
+                                              Width="120"
+                                              Binding="{Binding PackageSize}"/>
+                            
+                            <!-- คอลัมน์ขนาดกล่อง -->
+                            <DataGridTextColumn Header="ຂີ້ນກ່ອງ" 
+                                              Width="90"
+                                              Binding="{Binding BoxSize}"/>
+                            
+                            <!-- คอลัมน์จำนวนคงเหลือ -->
+                            <DataGridTextColumn Header="ຈຳນວນເຫຼືອ" 
+                                              Width="100"
+                                              Binding="{Binding RemainingStock}"/>
+                            
+                            <!-- คอลัมน์ราคาซื้อ -->
+                            <DataGridTextColumn Header="ລາຄາຊື້" 
+                                              Width="100"
+                                              Binding="{Binding PurchasePrice}"/>
+                            
+                            <!-- คอลัมน์ราคาขาย -->
+                            <DataGridTextColumn Header="ລາຄາຂາຍ" 
+                                              Width="100"
+                                              Binding="{Binding SellingPrice}"/>
+                            
+                            <!-- คอลัมน์ยี่ห้อ -->
+                            <DataGridTextColumn Header="ຍີ່ຫໍ້" 
+                                              Width="100"
+                                              Binding="{Binding BrandName}"/>
+                            
+                            <!-- คอลัมน์ประเภท -->
+                            <DataGridTextColumn Header="ປະເພດ" 
+                                              Width="100"
+                                              Binding="{Binding CategoryName}"/>
+                            
+                            <!-- คอลัมน์หมวดหมู่ -->
+                            <DataGridTextColumn Header="ໝວດໝູ່" 
+                                              Width="*"
+                                              Binding="{Binding TypeName}"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </UserControl>
