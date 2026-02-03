@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Controls.Primitives;
 using System;
 using System.Collections.ObjectModel;
@@ -21,8 +23,23 @@ namespace My_program.Views
             LoadBrandsIntoComboBox();
             ApplyNumberFormatting();
             LoadDataFromDatabase();
-        }
 
+            //buttonAdd
+            var buttonAdd = this.Find<Button>("buttonAdd");
+            if (buttonAdd != null)
+            {
+                buttonAdd.Click += buttonAdd_Click;
+                Console.WriteLine("✅ buttonAdd ຖືກຜູກກັບເຫດການແລ້ວ");
+            }
+
+            //buttonCancel
+            var buttonCancel = this.Find<Button>("buttonCancel");
+            if (buttonCancel != null)
+            {
+                buttonCancel.Click += buttonCancel_Click;
+                Console.WriteLine("✅ buttonCancel ຖືກຜູກກັບເຫດການແລ້ວ");
+            }
+        }
 
         
         private async void LoadCategoriesIntoComboBox()
@@ -145,12 +162,186 @@ namespace My_program.Views
                 if (dataGrid != null)
                 {
                     dataGrid.ItemsSource = Products;
+                    dataGrid.DoubleTapped += DgProducts_DoubleTapped;
                     Console.WriteLine($"✅ แสดงข้อมูลสินค้าใน DataGrid แล้ว");
                 }
             }
             catch (Exception ex)
             {
                 Console.WriteLine($"❌ Error loading product data: {ex.Message}");
+            }
+        }
+
+        //buttonAdd
+        private async void buttonAdd_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var dgProducts = this.Find<DataGrid>("dgProducts");
+                if (dgProducts.SelectedItem != null)
+                {
+                    var window = (Window)this.VisualRoot;
+                    await My_program.Helpers.ShowDialog.ShowError(window, "ถ้าเลือกแล้วไม่สามาเกดเพีมได้");
+                    return;
+                }
+
+                // ตรวจสอบข้อมูลว่าง
+                var txtPro_id = this.Find<TextBox>("txtPro_id");
+                var txtProName = this.Find<TextBox>("txtProName");
+                var textUnit = this.Find<TextBox>("textUnit");
+                var textQty = this.Find<TextBox>("textQty");
+                var txtQtyMin = this.Find<TextBox>("txtQtyMin");
+                var textCostPrice = this.Find<TextBox>("textCost_price");
+                var textRetailPrice = this.Find<TextBox>("textRetail_price");
+                var comboBrand = this.Find<ComboBox>("comboBrand");
+                var comboCategory = this.Find<ComboBox>("comboCategory");
+                var comboStatus = this.Find<ComboBox>("comboStatus");
+
+                if (string.IsNullOrWhiteSpace(txtPro_id?.Text) ||
+                    string.IsNullOrWhiteSpace(txtProName?.Text) ||
+                    string.IsNullOrWhiteSpace(textUnit?.Text) ||
+                    string.IsNullOrWhiteSpace(textQty?.Text) ||
+                    string.IsNullOrWhiteSpace(txtQtyMin?.Text) ||
+                    string.IsNullOrWhiteSpace(textCostPrice?.Text) ||
+                    string.IsNullOrWhiteSpace(textRetailPrice?.Text) ||
+                    comboBrand?.SelectedItem == null ||
+                    comboCategory?.SelectedItem == null ||
+                    comboStatus?.SelectedItem == null)
+                {
+                    var window = (Window)this.VisualRoot;
+                    await My_program.Helpers.ShowDialog.ShowError(window, "ກະລຸນາປ້ອນຂໍ້ມູນໄຫ້ຄົບ");
+                    return;
+                }
+                // หา TextBox ที่ต้องการใส่ NumberFormatter
+
+                
+                // ใช้ NumberFormatter กับแต่ละ TextBox
+                if (textQty != null)
+                {
+                    NumberFormatter.ApplyNumberComma(textQty, integerOnly: true); // จำนวนเต็มเท่านั้น
+                    Console.WriteLine("✅ ใช้ NumberFormatter กับ textQty แล้ว");
+                }
+                
+                if (txtQtyMin != null)
+                {
+                    NumberFormatter.ApplyNumberComma(txtQtyMin, integerOnly: true); // จำนวนเต็มเท่านั้น
+                    Console.WriteLine("✅ ใช้ NumberFormatter กับ txtQtyMin แล้ว");
+                }
+                
+                if (textCostPrice != null)
+                {
+                    NumberFormatter.ApplyNumberComma(textCostPrice, integerOnly: false); // รองรับทศนิยม
+                    Console.WriteLine("✅ ใช้ NumberFormatter กับ textCost_price แล้ว");
+                }
+                
+                if (textRetailPrice != null)
+                {
+                    NumberFormatter.ApplyNumberComma(textRetailPrice, integerOnly: false); // รองรับทศนิยม
+                    Console.WriteLine("✅ ใช้ NumberFormatter กับ textRetail_price แล้ว");
+                }
+
+                try
+                {
+                    var window = (Window)this.VisualRoot;
+
+                    // ตรวจสอบรหัสซ้ำ
+                    var con = new Connection_db();
+                    await con.connectdb.OpenAsync();
+                    
+                    string checkSql = "SELECT COUNT(*) FROM product WHERE barcode = @barcode";
+                    MySqlCommand checkCmd = new MySqlCommand(checkSql, con.connectdb);
+                    checkCmd.Parameters.AddWithValue("@barcode", txtPro_id.Text);
+                    int count = Convert.ToInt32(await checkCmd.ExecuteScalarAsync());
+
+                    if (count > 0)
+                    {
+                        con.connectdb.Close();
+                        await My_program.Helpers.ShowDialog.ShowError(window, "ລະຫັດສິນຄ້ານີ້ມີໃນລະບົບແລ້ວ");
+                        return;
+                    }
+
+                    // ปิดการเชื่อมต่อเมื่อเช็คเสร็จ
+                    con.connectdb.Close();
+                    
+                    Console.WriteLine("✅ Barcode check passed (Not inserting yet as requested).");
+                    // Implement Insert logic here later
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"❌ Error checking product: {ex.Message}");
+                    var window = (Window)this.VisualRoot;
+                    if (window != null)
+                    {
+                        await My_program.Helpers.ShowDialog.ShowError(window, $"ເກີດຂໍ້ຜິດພາດ: {ex.Message}");
+                    }
+                }
+
+                
+
+                
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error loading product data: {ex.Message}");
+            }
+        }
+
+        //buttonCancel
+        private void buttonCancel_Click(object sender, RoutedEventArgs e)
+        {
+            ClearInputData();
+        }
+
+        private void DgProducts_DoubleTapped(object? sender, TappedEventArgs e)
+        {
+            ClearInputData();
+        }
+
+        private void ClearInputData()
+        {
+            try
+            {
+                // Clear DataGrid Selection
+                var dgProducts = this.Find<DataGrid>("dgProducts");
+                if (dgProducts != null) dgProducts.SelectedItem = null;
+
+                // Clear TextBoxes
+                var txtPro_id = this.Find<TextBox>("txtPro_id");
+                if (txtPro_id != null) txtPro_id.Text = string.Empty;
+
+                var txtProName = this.Find<TextBox>("txtProName");
+                if (txtProName != null) txtProName.Text = string.Empty;
+                
+                var textUnit = this.Find<TextBox>("textUnit");
+                if (textUnit != null) textUnit.Text = string.Empty;
+
+                var textQty = this.Find<TextBox>("textQty");
+                if (textQty != null) textQty.Text = string.Empty;
+
+                var txtQtyMin = this.Find<TextBox>("txtQtyMin");
+                if (txtQtyMin != null) txtQtyMin.Text = string.Empty;
+
+                var textCostPrice = this.Find<TextBox>("textCost_price");
+                if (textCostPrice != null) textCostPrice.Text = string.Empty;
+
+                var textRetailPrice = this.Find<TextBox>("textRetail_price");
+                if (textRetailPrice != null) textRetailPrice.Text = string.Empty;
+
+                // Clear ComboBoxes
+                var comboBrand = this.Find<ComboBox>("comboBrand");
+                if (comboBrand != null) comboBrand.SelectedItem = null;
+
+                var comboCategory = this.Find<ComboBox>("comboCategory");
+                if (comboCategory != null) comboCategory.SelectedItem = null;
+
+                var comboStatus = this.Find<ComboBox>("comboStatus");
+                if (comboStatus != null) comboStatus.SelectedItem = null;
+                
+                Console.WriteLine("✅ ยกเลิกการเลือกและล้างข้อมูลเรียบร้อย");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error clearing input data: {ex.Message}");
             }
         }
     }

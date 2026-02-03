@@ -58,7 +58,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock Text="ຊື່ສິນຄ້າ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
-                <TextBox x:Name="txtProName" Height="35" Foreground="Black"/>
+                <TextBox x:Name="txtProName" Height="35"/>
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock Text="ລາຄາຕົ້ນທຶນ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
@@ -84,7 +84,7 @@
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <TextBlock Text="ຫົວໜ່ວຍ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
-                <TextBox x:Name="textUnit" Height="35" Foreground="Black"/>
+                <TextBox x:Name="textUnit" Height="35"/>
             </StackPanel>
             <StackPanel Grid.Column="2">
                 <TextBlock Text="ລາຄາຂາຍ" FontSize="14" Margin="0,0,0,3" Foreground="Black"/>
