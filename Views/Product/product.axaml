@@ -210,52 +210,52 @@
                             <!-- คอลัมน์รหัสสินค้า -->
                             <DataGridTextColumn Header="ລະຫັດສິນຄ້າ" 
                                               Width="100"
-                                              Binding="{Binding ProductCode}"/>
+                                              Binding="{Binding barcode}"/>
                             
                             <!-- คอลัมน์ชื่อสินค้า -->
                             <DataGridTextColumn Header="ຊື່ສິນຄ້າ" 
                                               Width="150"
-                                              Binding="{Binding ProductName}"/>
+                                              Binding="{Binding product_name}"/>
                             
                             <!-- คอลัมน์ขนาดบรรจุ -->
                             <DataGridTextColumn Header="ຂະໜາດບັນຈຸ" 
                                               Width="120"
-                                              Binding="{Binding PackageSize}"/>
+                                              Binding="{Binding unit}"/>
                             
                             <!-- คอลัมน์ขนาดกล่อง -->
                             <DataGridTextColumn Header="ຂີ້ນກ່ອງ" 
                                               Width="90"
-                                              Binding="{Binding BoxSize}"/>
+                                              Binding="{Binding quantity}"/>
                             
                             <!-- คอลัมน์จำนวนคงเหลือ -->
                             <DataGridTextColumn Header="ຈຳນວນເຫຼືອ" 
                                               Width="100"
-                                              Binding="{Binding RemainingStock}"/>
+                                              Binding="{Binding quantity_min}"/>
                             
                             <!-- คอลัมน์ราคาซื้อ -->
                             <DataGridTextColumn Header="ລາຄາຊື້" 
                                               Width="100"
-                                              Binding="{Binding PurchasePrice}"/>
+                                              Binding="{Binding cost_price}"/>
                             
                             <!-- คอลัมน์ราคาขาย -->
                             <DataGridTextColumn Header="ລາຄາຂາຍ" 
                                               Width="100"
-                                              Binding="{Binding SellingPrice}"/>
+                                              Binding="{Binding retail_price}"/>
                             
                             <!-- คอลัมน์ยี่ห้อ -->
                             <DataGridTextColumn Header="ຍີ່ຫໍ້" 
                                               Width="100"
-                                              Binding="{Binding BrandName}"/>
+                                              Binding="{Binding brand_name}"/>
                             
                             <!-- คอลัมน์ประเภท -->
                             <DataGridTextColumn Header="ປະເພດ" 
                                               Width="100"
-                                              Binding="{Binding CategoryName}"/>
+                                              Binding="{Binding category_name}"/>
                             
                             <!-- คอลัมน์หมวดหมู่ -->
                             <DataGridTextColumn Header="ໝວດໝູ່" 
                                               Width="*"
-                                              Binding="{Binding TypeName}"/>
+                                              Binding="{Binding status}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </StackPanel>
