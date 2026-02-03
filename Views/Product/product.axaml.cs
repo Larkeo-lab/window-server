@@ -42,6 +42,14 @@ namespace My_program.Views
                 buttonCancel.Click += buttonCancel_Click;
                 Console.WriteLine("✅ buttonCancel ຖືກຜູກກັບເຫດການແລ້ວ");
             }
+
+            //buttonEdit
+            var buttonEdit = this.Find<Button>("buttonEdit");
+            if (buttonEdit != null)
+            {
+                buttonEdit.Click += buttonEdit_Click;
+                Console.WriteLine("✅ buttonEdit ຖືກຜູກກັບເຫດການແລ້ວ");
+            }
         }
 
         
@@ -328,11 +336,113 @@ namespace My_program.Views
             }
         }
 
+        //buttonEdit
+        private async void buttonEdit_Click(object? sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var parentWindow = TopLevel.GetTopLevel(this) as Window;
+                var dgProducts = this.Find<DataGrid>("dgProducts");
+            
+                // ตรวจสอบว่ามีการเลือกแถวในตารางหรือไม่
+                if (dgProducts?.SelectedItem == null)
+                {
+                    if (parentWindow != null)
+                    {
+                        await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, "ກະລຸນາເລືອກຂໍ້ມູນໃນຕາຕະລາງກ່ອນ");
+                    }
+                    return;
+                }
+                
+                // Implement Update Logic Here
+                // Find controls
+                var txtPro_id = this.Find<TextBox>("txtPro_id");
+                var txtProName = this.Find<TextBox>("txtProName");
+                var textUnit = this.Find<TextBox>("textUnit");
+                var textQty = this.Find<TextBox>("textQty");
+                var txtQtyMin = this.Find<TextBox>("txtQtyMin");
+                var textCostPrice = this.Find<TextBox>("textCost_price");
+                var textRetailPrice = this.Find<TextBox>("textRetail_price");
+                var comboBrand = this.Find<ComboBox>("comboBrand");
+                var comboCategory = this.Find<ComboBox>("comboCategory");
+                var comboStatus = this.Find<ComboBox>("comboStatus");
+
+                if (string.IsNullOrWhiteSpace(txtPro_id?.Text) ||
+                    string.IsNullOrWhiteSpace(txtProName?.Text) ||
+                    string.IsNullOrWhiteSpace(textUnit?.Text) ||
+                    string.IsNullOrWhiteSpace(textQty?.Text) ||
+                    string.IsNullOrWhiteSpace(txtQtyMin?.Text) ||
+                    string.IsNullOrWhiteSpace(textCostPrice?.Text) ||
+                    string.IsNullOrWhiteSpace(textRetailPrice?.Text) ||
+                    comboBrand?.SelectedItem == null ||
+                    comboCategory?.SelectedItem == null ||
+                    comboStatus?.SelectedItem == null)
+                {
+                    if (parentWindow != null) await My_program.Helpers.ShowDialog.ShowError(parentWindow, "ກະລຸນາປ້ອນຂໍ້ມູນໄຫ້ຄົບ");
+                    return;
+                }
+
+                var con = new Connection_db();
+                await con.connectdb.OpenAsync();
+
+                string sql = @"UPDATE product SET 
+                                product_name = @product_name,
+                                unit = @unit,
+                                quantity = @quantity,
+                                quantity_min = @quantity_min,
+                                cost_price = @cost_price,
+                                retail_price = @retail_price,
+                                brand_id = @brand_id,
+                                category_id = @category_id,
+                                status = @status
+                                WHERE barcode = @barcode";
+
+                MySqlCommand cmd = new MySqlCommand(sql, con.connectdb);
+                cmd.Parameters.AddWithValue("@barcode", txtPro_id.Text);
+                cmd.Parameters.AddWithValue("@product_name", txtProName.Text);
+                cmd.Parameters.AddWithValue("@unit", textUnit.Text);
+                cmd.Parameters.AddWithValue("@quantity", int.Parse(textQty.Text.Replace(",", "")));
+                cmd.Parameters.AddWithValue("@quantity_min", int.Parse(txtQtyMin.Text.Replace(",", "")));
+                cmd.Parameters.AddWithValue("@cost_price", decimal.Parse(textCostPrice.Text.Replace(",", "")));
+                cmd.Parameters.AddWithValue("@retail_price", decimal.Parse(textRetailPrice.Text.Replace(",", "")));
+                
+                var selectedBrand = (BrandModel)comboBrand.SelectedItem;
+                cmd.Parameters.AddWithValue("@brand_id", selectedBrand.Id);
+
+                var selectedCategory = (CategoryModel)comboCategory.SelectedItem;
+                cmd.Parameters.AddWithValue("@category_id", selectedCategory.Id);
+
+                var selectedStatus = (ComboBoxItem)comboStatus.SelectedItem;
+                cmd.Parameters.AddWithValue("@status", selectedStatus.Content.ToString());
+
+                await cmd.ExecuteNonQueryAsync();
+                con.connectdb.Close();
+
+                LoadDataFromDatabase();
+                ClearInputData();
+
+                if (parentWindow != null)
+                {
+                    await ShowSuccessDialogHelper.ShowSuccessDialog(parentWindow, "ແກ້ໄຂຂໍ້ມູນສຳເລັດ");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error updating product: {ex.Message}");
+                var parentWindow = TopLevel.GetTopLevel(this) as Window;
+                if (parentWindow != null)
+                {
+                    await ShowErrorDialogHelper.ShowErrorDialog(parentWindow, $"ເກີດຂໍ້ຜິດພາດ: {ex.Message}");
+                }
+            }
+        }
+
         //buttonCancel
         private void buttonCancel_Click(object sender, RoutedEventArgs e)
         {
             ClearInputData();
         }
+
 
         private void DgProducts_DoubleTapped(object? sender, TappedEventArgs e)
         {
