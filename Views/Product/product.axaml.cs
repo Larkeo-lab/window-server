@@ -19,6 +19,9 @@ namespace My_program.Views
         public Product()
         {
             InitializeComponent();
+            
+            InitializeComponent();
+            
             LoadCategoriesIntoComboBox();
             LoadBrandsIntoComboBox();
             ApplyNumberFormatting();
@@ -177,15 +180,13 @@ namespace My_program.Views
         {
             try
             {
-                var dgProducts = this.Find<DataGrid>("dgProducts");
                 if (dgProducts.SelectedItem != null)
                 {
                     var window = (Window)this.VisualRoot;
                     await My_program.Helpers.ShowDialog.ShowError(window, "ถ้าเลือกแล้วไม่สามาเกดเพีมได้");
                     return;
                 }
-
-                // ตรวจสอบข้อมูลว่าง
+                // Find controls locally to avoid conflict with generated fields
                 var txtPro_id = this.Find<TextBox>("txtPro_id");
                 var txtProName = this.Find<TextBox>("txtProName");
                 var textUnit = this.Find<TextBox>("textUnit");
@@ -260,21 +261,59 @@ namespace My_program.Views
                         return;
                     }
 
-                    // ปิดการเชื่อมต่อเมื่อเช็คเสร็จ
-                    con.connectdb.Close();
+                    // เพิ่มข้อมูลลงฐานข้อมูล
+                    string insertSql = @"INSERT INTO product VALUES (
+                                        @barcode, 
+                                        @product_name, 
+                                        @unit, 
+                                        @quantity, 
+                                        @quantity_min, 
+                                        @cost_price, 
+                                        @retail_price, 
+                                        @brand_id, 
+                                        @category_id, 
+                                        @status
+                                    )";
                     
-                    Console.WriteLine("✅ Barcode check passed (Not inserting yet as requested).");
-                    // Implement Insert logic here later
+                    MySqlCommand insertCmd = new MySqlCommand(insertSql, con.connectdb);
+                    insertCmd.Parameters.AddWithValue("@barcode", txtPro_id.Text);
+                    insertCmd.Parameters.AddWithValue("@product_name", txtProName.Text);
+                    insertCmd.Parameters.AddWithValue("@unit", textUnit.Text);
+                    insertCmd.Parameters.AddWithValue("@quantity", int.Parse(textQty.Text.Replace(",", "")));
+                    insertCmd.Parameters.AddWithValue("@quantity_min", int.Parse(txtQtyMin.Text.Replace(",", "")));
+                    insertCmd.Parameters.AddWithValue("@cost_price", decimal.Parse(textCostPrice.Text.Replace(",", "")));
+                    insertCmd.Parameters.AddWithValue("@retail_price", decimal.Parse(textRetailPrice.Text.Replace(",", "")));
+                    
+                    var selectedBrand = (BrandModel)comboBrand.SelectedItem;
+                    insertCmd.Parameters.AddWithValue("@brand_id", selectedBrand.Id);
+
+                    var selectedCategory = (CategoryModel)comboCategory.SelectedItem;
+                    insertCmd.Parameters.AddWithValue("@category_id", selectedCategory.Id);
+
+                    var selectedStatus = (ComboBoxItem)comboStatus.SelectedItem;
+                    insertCmd.Parameters.AddWithValue("@status", selectedStatus.Content.ToString());
+
+                    await insertCmd.ExecuteNonQueryAsync();
+                    con.connectdb.Close();
+
+                    // โหลดข้อมูลใหม่เพื่ออัพเดท DataGrid
+                    LoadDataFromDatabase();
+                    ClearInputData(); // ล้างข้อมูลหลังจากเพิ่มสำเร็จ
+                    
+                    Console.WriteLine($"✅ Added product: {txtProName.Text}");
+                    await ShowSuccessDialogHelper.ShowSuccessDialog(window, "ເພີ່ມຂໍ້ມູນສຳເລັດ");
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine($"❌ Error checking product: {ex.Message}");
+                    Console.WriteLine($"❌ Error adding product: {ex.Message}");
                     var window = (Window)this.VisualRoot;
                     if (window != null)
                     {
                         await My_program.Helpers.ShowDialog.ShowError(window, $"ເກີດຂໍ້ຜິດພາດ: {ex.Message}");
                     }
                 }
+                // insert data
+                
 
                 
 
