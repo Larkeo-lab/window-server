@@ -218,17 +218,17 @@
                                               Binding="{Binding product_name}"/>
                             
                             <!-- คอลัมน์ขนาดบรรจุ -->
-                            <DataGridTextColumn Header="ຂະໜາດບັນຈຸ" 
+                            <DataGridTextColumn Header="ຫົວໜ່ວຍ" 
                                               Width="120"
                                               Binding="{Binding unit}"/>
                             
                             <!-- คอลัมน์ขนาดกล่อง -->
-                            <DataGridTextColumn Header="ຂີ້ນກ່ອງ" 
+                            <DataGridTextColumn Header="ຈຳນວນ" 
                                               Width="90"
                                               Binding="{Binding quantity}"/>
                             
                             <!-- คอลัมน์จำนวนคงเหลือ -->
-                            <DataGridTextColumn Header="ຈຳນວນເຫຼືອ" 
+                            <DataGridTextColumn Header="ຈຳນວນຕຳສຸດ" 
                                               Width="100"
                                               Binding="{Binding quantity_min}"/>
                             
@@ -253,7 +253,7 @@
                                               Binding="{Binding category_name}"/>
                             
                             <!-- คอลัมน์หมวดหมู่ -->
-                            <DataGridTextColumn Header="ໝວດໝູ່" 
+                            <DataGridTextColumn Header="ສະຖານະ" 
                                               Width="*"
                                               Binding="{Binding status}"/>
                         </DataGrid.Columns>

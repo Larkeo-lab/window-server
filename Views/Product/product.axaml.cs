@@ -132,7 +132,7 @@ namespace My_program.Views
                 // เปิดการเชื่อมต่อ
                 await con.connectdb.OpenAsync();
                 
-                string sql = "SELECT barcode, product_name, unit, quantity, quantity_min, cost_price, retail_price, brand_name, category_name, status FROM product p JOIN brand b ON p.brand_id = b.brand_id JOIN category c ON p.category_id = c.category_id ORDER BY barcode ASC";
+                string sql = "SELECT barcode, product_name, unit, quantity, quantity_min, cost_price, retail_price, p.brand_id, brand_name, p.category_id, category_name, status FROM product p JOIN brand b ON p.brand_id = b.brand_id JOIN category c ON p.category_id = c.category_id ORDER BY barcode ASC";
                 MySqlCommand cmd = new MySqlCommand(sql, con.connectdb);
                 
                 using (MySqlDataReader reader = (MySqlDataReader)await cmd.ExecuteReaderAsync())
@@ -148,7 +148,9 @@ namespace My_program.Views
                             quantity_min = reader.GetInt32("quantity_min"),
                             cost_price = reader.GetDecimal("cost_price"),
                             retail_price = reader.GetDecimal("retail_price"),
+                            brand_id = reader.GetInt32("brand_id"),
                             brand_name = reader.GetString("brand_name"),
+                            category_id = reader.GetInt32("category_id"),
                             category_name = reader.GetString("category_name"),
                             status = reader.GetString("status")
                         });
@@ -166,6 +168,7 @@ namespace My_program.Views
                 {
                     dataGrid.ItemsSource = Products;
                     dataGrid.DoubleTapped += DgProducts_DoubleTapped;
+                    dataGrid.SelectionChanged += DgProducts_SelectionChanged;
                     Console.WriteLine($"✅ แสดงข้อมูลสินค้าใน DataGrid แล้ว");
                 }
             }
@@ -183,7 +186,7 @@ namespace My_program.Views
                 if (dgProducts.SelectedItem != null)
                 {
                     var window = (Window)this.VisualRoot;
-                    await My_program.Helpers.ShowDialog.ShowError(window, "ถ้าเลือกแล้วไม่สามาเกดเพีมได้");
+                    await My_program.Helpers.ShowDialog.ShowError(window, "ຖ້າເລືອກແລ້ວບໍ່ສາມາດເພີ່ມໄດ້");
                     return;
                 }
                 // Find controls locally to avoid conflict with generated fields
@@ -346,7 +349,11 @@ namespace My_program.Views
 
                 // Clear TextBoxes
                 var txtPro_id = this.Find<TextBox>("txtPro_id");
-                if (txtPro_id != null) txtPro_id.Text = string.Empty;
+                if (txtPro_id != null) 
+                {
+                    txtPro_id.Text = string.Empty;
+                    txtPro_id.IsReadOnly = false;
+                }
 
                 var txtProName = this.Find<TextBox>("txtProName");
                 if (txtProName != null) txtProName.Text = string.Empty;
@@ -383,6 +390,82 @@ namespace My_program.Views
                 Console.WriteLine($"❌ Error clearing input data: {ex.Message}");
             }
         }
+
+        private void DgProducts_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+        {
+            try 
+            {
+                var dgProducts = this.Find<DataGrid>("dgProducts");
+                if (dgProducts?.SelectedItem is ProductModel selectedProduct)
+                {
+                    // Find controls
+                    var txtPro_id = this.Find<TextBox>("txtPro_id");
+                    var txtProName = this.Find<TextBox>("txtProName");
+                    var textUnit = this.Find<TextBox>("textUnit");
+                    var textQty = this.Find<TextBox>("textQty");
+                    var txtQtyMin = this.Find<TextBox>("txtQtyMin");
+                    var textCostPrice = this.Find<TextBox>("textCost_price");
+                    var textRetailPrice = this.Find<TextBox>("textRetail_price");
+                    var comboBrand = this.Find<ComboBox>("comboBrand");
+                    var comboCategory = this.Find<ComboBox>("comboCategory");
+                    var comboStatus = this.Find<ComboBox>("comboStatus");
+
+                    // Set TextBoxes
+                    if (txtPro_id != null) 
+                    {
+                        txtPro_id.Text = selectedProduct.barcode;
+                        txtPro_id.IsReadOnly = true;
+                    }
+                    if (txtProName != null) txtProName.Text = selectedProduct.product_name;
+                    if (textUnit != null) textUnit.Text = selectedProduct.unit;
+                    if (textQty != null) textQty.Text = selectedProduct.quantity.ToString("N0");
+                    if (txtQtyMin != null) txtQtyMin.Text = selectedProduct.quantity_min.ToString("N0");
+                    if (textCostPrice != null) textCostPrice.Text = selectedProduct.cost_price.ToString("N2");
+                    if (textRetailPrice != null) textRetailPrice.Text = selectedProduct.retail_price.ToString("N2");
+
+                    // Set ComboBox selections
+                    if (comboBrand != null && comboBrand.ItemsSource != null)
+                    {
+                        foreach (var item in comboBrand.ItemsSource)
+                        {
+                            if (item is BrandModel brand && brand.Id == selectedProduct.brand_id)
+                            {
+                                comboBrand.SelectedItem = item;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (comboCategory != null && comboCategory.ItemsSource != null)
+                    {
+                        foreach (var item in comboCategory.ItemsSource)
+                        {
+                            if (item is CategoryModel category && category.Id == selectedProduct.category_id)
+                            {
+                                comboCategory.SelectedItem = item;
+                                break;
+                            }
+                        }
+                    }
+
+                    if (comboStatus != null)
+                    {
+                        foreach (var item in comboStatus.Items)
+                        {
+                            if (item is ComboBoxItem comboItem && comboItem.Content?.ToString() == selectedProduct.status)
+                            {
+                                comboStatus.SelectedItem = item;
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"❌ Error selecting product: {ex.Message}");
+            }
+        }
     }
 }
 
@@ -396,7 +479,9 @@ public class ProductModel
     public int quantity_min { get; set; }
     public decimal cost_price { get; set; }
     public decimal retail_price { get; set; }
+    public int brand_id { get; set; }
     public string brand_name { get; set; } = string.Empty;
+    public int category_id { get; set; }
     public string category_name { get; set; } = string.Empty;
     public string status { get; set; } = string.Empty;
 }
